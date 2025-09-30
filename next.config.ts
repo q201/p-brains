@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  devIndicators: {
+    position: 'bottom-right',
+  },
+  allowedDevOrigins: ['*.replit.dev'],
 };
 
 export default nextConfig;
