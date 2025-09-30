@@ -26,7 +26,7 @@ export function verifyToken(token: string): any {
   }
 }
 
-type Role = 'USER' | 'ADMIN';
+type Role = 'USER' | 'ADMIN' | 'user' | 'admin';
 
 type AuthenticatedUser = {
   id: string;

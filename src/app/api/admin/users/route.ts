@@ -21,5 +21,5 @@ async function handler(req: NextRequest) {
   }
 }
 
-export const GET = withAuth(handler, ['ADMIN']);
+export const GET = withAuth(handler, ['admin']);
 

@@ -31,5 +31,5 @@ async function handler(req: Request, { params }: { params: { id: string } }) {
   }
 }
 
-export const PUT = withAuth(handler, ['ADMIN']);
-export const DELETE = withAuth(handler, ['ADMIN']);
+export const PUT = withAuth(handler, ['admin']);
+export const DELETE = withAuth(handler, ['admin']);

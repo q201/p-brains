@@ -15,4 +15,4 @@ async function handler(req: Request) {
   }
 }
 
-export const GET = withAuth(handler, ['ADMIN']);
+export const GET = withAuth(handler, ['admin']);
