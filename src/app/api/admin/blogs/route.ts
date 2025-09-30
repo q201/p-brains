@@ -11,7 +11,7 @@ async function postHandler(req: NextRequest, user: { id: string }) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const post = await db.post.create({
+    const blog = await db.blog.create({
       data: {
         title,
         content,
@@ -21,7 +21,7 @@ async function postHandler(req: NextRequest, user: { id: string }) {
       },
     });
 
-    return NextResponse.json(post);
+    return NextResponse.json(blog);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to create blog' }, { status: 500 });
   }
@@ -29,8 +29,21 @@ async function postHandler(req: NextRequest, user: { id: string }) {
 
 async function getHandler(req: NextRequest) {
   try {
-    const posts = await db.post.findMany();
-    return NextResponse.json(posts);
+    const blogs = await db.blog.findMany({
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+    return NextResponse.json(blogs);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch blogs' }, { status: 500 });
   }

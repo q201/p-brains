@@ -8,23 +8,23 @@ async function handler(req: Request, { params }: { params: { id: string } }) {
 
   if (req.method === 'PUT') {
     try {
-      const { title, content, published } = await req.json();
-      const post = await db.post.update({
+      const { title, content, slug, published } = await req.json();
+      const blog = await db.blog.update({
         where: { id },
-        data: { title, content, published },
+        data: { title, content, slug, published },
       });
-      return NextResponse.json(post);
+      return NextResponse.json(blog);
     } catch (error) {
-      console.error('Error updating post:', error);
-      return NextResponse.json({ error: 'Failed to update post' }, { status: 500 });
+      console.error('Error updating blog:', error);
+      return NextResponse.json({ error: 'Failed to update blog' }, { status: 500 });
     }
   } else if (req.method === 'DELETE') {
     try {
-      await db.post.delete({ where: { id } });
+      await db.blog.delete({ where: { id } });
       return new Response(null, { status: 204 });
     } catch (error) {
-      console.error('Error deleting post:', error);
-      return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 });
+      console.error('Error deleting blog:', error);
+      return NextResponse.json({ error: 'Failed to delete blog' }, { status: 500 });
     }
   } else {
     return NextResponse.json({ error: `Method ${req.method} Not Allowed` }, { status: 405 });
