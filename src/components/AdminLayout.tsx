@@ -19,19 +19,19 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       try {
         const res = await fetch('/api/auth/me');
         if (!res.ok) {
-          router.push('/login');
+          router.push('/admin/login');
           return;
         }
         
         const data = await res.json();
         if (data.user?.role !== 'admin') {
-          router.push('/login');
+          router.push('/admin/login');
           return;
         }
         
         setIsAuthenticated(true);
       } catch (error) {
-        router.push('/login');
+        router.push('/admin/login');
       } finally {
         setIsLoading(false);
       }
